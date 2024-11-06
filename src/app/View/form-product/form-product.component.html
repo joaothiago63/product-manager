@@ -1,0 +1,82 @@
+<form class="w-full flex flex-col gap-4 p-5" [formGroup]="form" (ngSubmit)="submit()">
+    <button mat-flat-button color="primary" type="button" (click)="redirectToPage()" class="w-1/12 mb-10 flex"
+        matTooltip="return to home page" [disabled]="isLoading">
+        <span *ngIf="!isLoading" class="material-symbols-outlined">
+            keyboard_return
+        </span>
+    </button>
+    <div class="w-full grid grid-cols-3 gap-6">
+        <mat-form-field class="w-9/12">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+            <mat-error *ngIf="form.get('title')?.hasError('required')">
+                Title is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-9/12">
+            <mat-label>Choose an category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let item of categories" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('category')?.hasError('required')">
+                category is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12">
+            <mat-label>Price</mat-label>
+            <input matInput currencyMask formControlName="price">
+            <mat-error *ngIf="form.get('price')?.hasError('required')">
+                price is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12">
+            <mat-label>Discount Percentage</mat-label>
+            <input matInput type="number" formControlName="discountPercentage" max="100" min="0" placeholder="%">
+            <mat-error *ngIf="form.get('discountPercentage')?.hasError('required')">
+                Discount Percentage is required
+            </mat-error>
+            <mat-error *ngIf="form.get('discountPercentage')?.hasError('max')">discount must be less than 100
+            </mat-error>
+            <mat-error *ngIf="form.get('discountPercentage')?.hasError('min')">discount must be greater than
+                0</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12">
+            <mat-label>Rating</mat-label>
+            <input matInput type="number" formControlName="rating">
+            <mat-error *ngIf="form.get('rating')?.hasError('required')">
+                rating is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" formControlName="stock">
+            <mat-error *ngIf="form.get('stock')?.hasError('required')">
+                stock is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-9/12">
+            <mat-label>Brand</mat-label>
+            <input matInput formControlName="brand">
+            <mat-error *ngIf="form.get('brand')?.hasError('required')">
+                brand is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-5/12">
+            <mat-label>Sku</mat-label>
+            <input matInput formControlName="sku">
+            <mat-error *ngIf="form.get('sku')?.hasError('required')">
+                sku is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-9/12 col-start-1 col-span-3">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+            <mat-error *ngIf="form.get('description')?.hasError('required')">
+                description is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="w-full">
+        <button mat-flat-button color="primary" class="w-1/12" [disabled]="isLoading">{{data ? "Save" : "Create"}}</button>
+    </div>
+</form>

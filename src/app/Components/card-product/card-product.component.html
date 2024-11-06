@@ -1,0 +1,37 @@
+<div *ngIf="hasFilter || (!hasFilter && product.category !== 'groceries' && product.category !== 'motorcycle' && product.category !== ' kitchen-accessories')"
+    class="w-[20em] h-[33em]">
+    <div class="w-full flex justify-end p-2 ">
+        <div class="w-fit bg-orange-400 text-white text-center p-1 rounded-full">
+            {{product.category}}
+        </div>
+    </div>
+    <div class="w-full flex justify-center">
+        <img class="rounded w-full h-full" [src]="product.thumbnail">
+    </div>
+    <div class="text-center font-medium text-gray-500 text-lg">{{product.title.substring(0,27) + '...'}}</div>
+    <div *ngIf="product.price <= 100" class="w-full">
+        <span class="w-full text-red-600"><del>{{product.price}}</del></span>
+        <br />
+        <span class="text-2xl text-red-600">{{calculateDiscount().toFixed(2)}}</span>
+    </div>
+    <div *ngIf="product.price > 100" class="w-full">
+        <span class="w-full"><del>{{product.price}}</del></span>
+        <br />
+        <span class="text-2xl">{{calculateDiscount().toFixed(2)}}</span>
+    </div>
+    <div class="w-full p-3 text-gray-500">
+        <span>{{product.description.length > 90 ? product.description.substring(0, 50) + '... ' :
+            product.description}}</span>
+        <a (click)="showMore()" class="text-blue-500 hover:text-blue-700 underline cursor-pointer">Show
+            More</a>
+    </div>
+    <div class="w-full grid grid-cols-2 gap-2">
+        <button mat-flat-button color="primary" class="w-full" matTooltip="Edit product" type="button" (click)="edit()">
+            Edit
+        </button>
+        <button mat-flat-button color="warn" class="w-full" type="button" matTooltip="Delete product"
+            (click)="delete()">
+            Delete
+        </button>
+    </div>
+</div>

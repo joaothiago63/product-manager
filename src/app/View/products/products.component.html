@@ -1,0 +1,41 @@
+<div class="flex flex-col gap-6 min-w-fit h-full">
+    <div class="bg-white shadow-md p-5 rounded mx-5 grid grid-cols-3 gap-12">
+        <div class="w-full flex justify-center">
+            <mat-form-field class="w-9/12">
+                <mat-label>Name or Description</mat-label>
+                <input matInput [(ngModel)]="filter">
+            </mat-form-field>
+        </div>
+        <div class="w-full flex justify-center">
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select [value]="null" [(ngModel)]="filterCategory">
+                    <mat-option *ngFor="let item of categories" [value]="item">{{item}}</mat-option>
+                    <mat-option [value]="null">none</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="flex justify-end">
+            <button mat-flat-button color="primary" type="button" class="w-fit h-fit mt-6" (click)="search()"
+                matTooltip="Filter by Parameters">Search</button>
+        </div>
+
+    </div>
+    <div class="mx-5">
+        <button mat-flat-button color="primary" type="button" (click)="redirectToPage()" class="w-fit mb-10 flex"
+            matTooltip="Register a Product">Register Product</button>
+    </div>
+    <div class="bg-white shadow-md p-10 rounded flex flex-col gap-16  min-w-fit mx-5">
+        <div *ngIf="data.length > 0" class="w-full flex justify-between gap-6">
+            <div *ngFor="let product of data">
+                <app-card-product [hasFilter]="hasFilter" [product]="product"></app-card-product>
+            </div>
+        </div>
+        <div *ngIf="data.length === 0">
+            <h2 class="text-center">Product not Found</h2>
+        </div>
+        <mat-paginator *ngIf="data.length > 0" [length]="totalPage" [pageSize]="limit" aria-label="Select page" (page)="onPageChange($event)">
+        </mat-paginator>
+    </div>
+
+</div>

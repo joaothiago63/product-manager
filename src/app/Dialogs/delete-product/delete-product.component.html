@@ -1,0 +1,7 @@
+<div class="w-full flex justify-center flex-col gap-8">
+    <label class="text-2xl font-bold text-center">Deseja excluir {{data.title}}</label>
+    <div class="w-full grid grid-cols-2 gap-2">
+        <button class="font-bold text-white p-2 bg-black text-base rounded" (click)="cancel()">Cancel</button>
+        <button class="font-bold text-white p-2 bg-red-600 text-base rounded" (click)="confirm()">Confirm</button>
+    </div>
+</div>
